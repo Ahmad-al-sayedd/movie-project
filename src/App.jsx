@@ -1,4 +1,4 @@
-import { useNavigate, Routes, Route, Link } from "react-router-dom";
+import { useNavigate, Routes, Route, NavLink } from "react-router-dom";
 import HomePage from "./components/HomePage/HomePage";
 import TopRated from "./components/TopRated";
 import Favorites from "./components/Favorites";
@@ -13,6 +13,7 @@ import { SearchContext } from "./contexts/SearchContext";
 import LoginSignup from "./components/LoginSignup/LoginSignup";
 import Pagination from "@mui/material/Pagination";
 import { useContext } from "react";
+
 function App() {
   const navigate = useNavigate();
 
@@ -20,34 +21,35 @@ function App() {
     useContext(SearchContext);
 
   // every time the pagination page changes  run these condition
-  // the value  is by default  provided by material -ui paginaiton
+  // the value is by default provided by material-ui pagination
   const handlePageChange = (event, value) => {
-    // check if the value is not =  1  then got to the page/2 or page/4 ....
+    // check if the value is not = 1 then go to the page/2 or page/4 ....
     if (value !== 1) {
       navigate(`/movies/page/${value}`);
       setPage(value); // Update the page number in the state
     }
-    // if the value = 1  or the pagination num then go to home page
+    // if the value = 1 or the pagination num then go to home page
     else {
       navigate(`/movie-project`);
       setPage(value);
     }
   };
+
   return (
     <>
       <nav>
-        <Link className="home-link" onClick={() => setPage(1)} to="/">
+        <NavLink className="home-link" onClick={() => setPage(1)} to="/">
           Home
-        </Link>
+        </NavLink>
         <li className="favoriteElement">
-          <Link className="fav-link" to="/favorites">Favorites</Link>
+          <NavLink className="fav-link" to="/movie-project/favorites">Favorites</NavLink>
           {favoritesMovies.length > 0 && (
             <span className="favorite-span">{favoritesMovies.length}</span>
           )}
         </li>
 
-        <Link className="top-rated-link" to="/top-rated">Top Rated</Link>
-        <Link className="genres-link" to="/genres">Genres</Link>
+        <NavLink className="/movie-project/top-rated" to="/top-rated">Top Rated</NavLink>
+        <NavLink className="genres-link" to="/movie-project/genres">Genres</NavLink>
         <input
           className="search-input"
           onChange={(e) => {
@@ -57,24 +59,22 @@ function App() {
           placeholder="search for movies ..."
         ></input>
 
-        <Link  to="/search-page" className="search-link"> Search</Link>
+        <NavLink to="/movie-project/search-page" className="search-link"> Search</NavLink>
 
-        <Link to="/sign-in" className="sign-in-link">Sign in</Link>
+        <NavLink to="/sign-in" className="sign-in-link">Sign in</NavLink>
       </nav>
 
       <Routes>
-        <Route path="/" element={<HomePage></HomePage>}></Route>
-        <Route path="/favorites" element={<Favorites></Favorites>}></Route>
-        <Route path="/top-rated" element={<TopRated></TopRated>}></Route>
-        <Route path="/genres" element={<Genres></Genres>}></Route>
+        <Route path="/" element={<HomePage />} />
+        <Route path="/movie-project" element={<HomePage />} />  {/* Handle /movie-project */}
+        <Route path="/movie-project/favorites" element={<Favorites />} />
+        <Route path="/movie-project/top-rated" element={<TopRated />} />
+        <Route path="/movie-project/genres" element={<Genres />} />
         <Route path="/genres/:genre" element={<GenreMovies />} />
-        <Route path="/sign-in" element={<LoginSignup></LoginSignup>}></Route>
-        <Route
-          path="/movie/:id"
-          element={<MovieDetails></MovieDetails>}
-        ></Route>
-        <Route path="/search-page" element={<SearchPage />}></Route>
-        <Route path="*" element={<HomePage></HomePage>}></Route>
+        <Route path="/sign-in" element={<LoginSignup />} />
+        <Route path="/movie/:id" element={<MovieDetails />} />
+        <Route path="/movie-project/search-page" element={<SearchPage />} />
+        <Route path="*" element={<HomePage />} />
         <Route path="/movies/page/:page" element={<MoviesPage />} />
       </Routes>
 
