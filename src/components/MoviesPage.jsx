@@ -1,7 +1,7 @@
 import { useContext, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import { SearchContext } from "../contexts/SearchContext";
-
+import './HomePage/HomePage.scss'
 const MoviesPage = () => {
   const { addingToFavorite, pagesMovies, handlePagination, page } =
     useContext(SearchContext);
@@ -12,7 +12,7 @@ const MoviesPage = () => {
   }, [page]);
 
   return (
-    <div>
+    <div className="movies-container_div">
       <ul className="moviesContainer">
         {pagesMovies.map((movie) => (
           <div className="movieContainer" key={movie.imdbID}>
@@ -33,7 +33,7 @@ const MoviesPage = () => {
             <p>Year: {movie.Year}</p>
             <p>Genre: {movie.Genre || "N/A"}</p>
             <p>Rating: {movie.imdbRating || "N/A"}</p>
-            <button onClick={() => addingToFavorite(movie)}>
+            <button className="favorites-button" onClick={() => addingToFavorite(movie)}>
               Add to favorite
             </button>
           </div>
