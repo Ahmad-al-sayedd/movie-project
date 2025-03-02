@@ -1,4 +1,10 @@
-import {useLocation, useNavigate, Routes, Route, NavLink } from "react-router-dom";
+import {
+  useLocation,
+  useNavigate,
+  Routes,
+  Route,
+  NavLink,
+} from "react-router-dom";
 import HomePage from "./components/HomePage/HomePage";
 import Favorites from "./components/Favorites";
 import Genres from "./components/Genres/Genres";
@@ -17,8 +23,9 @@ function App() {
   const location = useLocation();
   const navigate = useNavigate();
   const [burgerMenu, setBurgerMenu] = useState(false); // Renamed to burgerMenu
-  
-  const { page, setPage, setSearchQuery, favoritesMovies } = useContext(SearchContext);
+
+  const { page, setPage, setSearchQuery, favoritesMovies } =
+    useContext(SearchContext);
 
   const handlePageChange = (event, value) => {
     if (value !== 1) {
@@ -33,22 +40,26 @@ function App() {
   return (
     <>
       {/* Toggle Burger Menu onClick */}
-      <div  className="burgerMenuBtn">
+      <div className="burgerMenuBtn">
         <RxHamburgerMenu onClick={() => setBurgerMenu(!burgerMenu)} />
       </div>
 
-      <nav className={burgerMenu?'active-nav-bar ':"Nav-Bar"}>
+      <nav className={burgerMenu ? "active-nav-bar " : "Nav-Bar"}>
         <NavLink className="home-link" onClick={() => setPage(1)} to="/">
           Home
         </NavLink>
         <li className="favoriteElement">
-          <NavLink className="fav-link" to="/movie-project/favorites">Favorites</NavLink>
+          <NavLink className="fav-link" to="/movie-project/favorites">
+            Favorites
+          </NavLink>
           {favoritesMovies.length > 0 && (
             <span className="favorite-span">{favoritesMovies.length}</span>
           )}
         </li>
-      
-        <NavLink className="genres-link" to="/movie-project/genres">Genres</NavLink>
+
+        <NavLink className="genres-link" to="/movie-project/genres">
+          Genres
+        </NavLink>
 
         <input
           className="search-input"
@@ -56,18 +67,22 @@ function App() {
           type="text"
           placeholder="search for movies ..."
         />
-        <NavLink to="/movie-project/search-page" className="search-link">Search</NavLink>
-        <NavLink to="/sign-in" className="sign-in-link">Sign in</NavLink>
+        <NavLink to="/movie-project/search-page" className="search-link">
+          Search
+        </NavLink>
+        <NavLink to=" /movie-project/sign-in" className="sign-in-link">
+          Sign in
+        </NavLink>
       </nav>
 
       <Routes>
         <Route path="/" element={<HomePage />} />
         <Route path="/movie-project" element={<HomePage />} />
         <Route path="/movie-project/favorites" element={<Favorites />} />
-    
+
         <Route path="/movie-project/genres" element={<Genres />} />
         <Route path="/genres/:genre" element={<GenreMovies />} />
-        <Route path="/sign-in" element={<LoginSignup />} />
+        <Route path=" /movie-project/sign-in" element={<LoginSignup />} />
         <Route path="/movie/:id" element={<MovieDetails />} />
         <Route path="/movie-project/search-page" element={<SearchPage />} />
         <Route path="*" element={<HomePage />} />

@@ -2,7 +2,7 @@ import { createContext, useState, useEffect } from "react";
 
 export const SearchContext = createContext();
 
-export default function SearchContextProvider(props) {
+export default function SearchContextProvider({children}) {
   const [movies, setMovies] = useState([]); // for 10 movies
   const [movie, setMovie] = useState(null); // for a single movie
   const [searchQuery, setSearchQuery] = useState(""); // for search bar
@@ -164,7 +164,7 @@ export default function SearchContextProvider(props) {
         pagesMovies,
       }}
     >
-      {props.children}
+      {children}
     </SearchContext.Provider>
   );
 }

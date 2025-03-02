@@ -53,6 +53,8 @@ export default function SearchPage() {
           <button className="favorites-button" onClick={() => addingToFavorite(movie)}>
             Add to favorite
           </button>
+          
+         
         </div>
       ))}
     </ul>

@@ -16,23 +16,33 @@ export default function Favorites() {
     <div className="movies-container_div">
       <h2>{favoritesMovies.length === 0 && " No Favorite movies available"}</h2>
       <ul className="moviesContainer">
-        {favoritesMovies.map((movie) => (
-          <div className="movieContainer" key={movie.imdbID}>
-            <h4>{movie.Title}</h4>
+      {favoritesMovies.map((movie) => (
+        <div className="movieContainer" key={movie.imdbID}>
+          <h4>{movie.Title}</h4>
+          <div className="expand">
             <img
               src={movie.Poster !== "N/A" ? movie.Poster : "NO IMAGE"}
               alt={movie.Title + " Poster"}
-              style={{ width: "80%", objectFit: "cover", padding: "10px 0" }}
+              style={{
+                width: "80%",
+                objectFit: "cover",
+                padding: "10px 0",
+                cursor: "pointer",
+              }}
+              onClick={() => navigate(`/movie/${movie.imdbID}`)}
             />
-            <p>Year: {movie.Year}</p>
-            <p>Genre: {movie.Genre || "N/A"}</p>
-            <p>Rating: {movie.imdbRating || "N/A"}</p>
-            <button className="remove-favs" onClick={() => removeFromFavorite(movie)}>
-              Remove from favorite
-            </button>
           </div>
-        ))}
-      </ul>
+          <p>Year: {movie.Year}</p>
+          <p>Genre: {movie.Genre || "N/A"}</p>
+          <p>Rating: {movie.imdbRating || "N/A"}</p>
+          <button  className="favorites-button" onClick={() => removeFromFavorite(movie)}>
+            Remove From Favorite
+          </button>
+          
+         
+        </div>
+      ))}
+    </ul>
     </div>
   );
 }
