@@ -48,12 +48,21 @@ export default function HomePage() {
     handleSearch(timeOfDay);
   }, [timeOfDay]);
 
-  useEffect(()=>{ // updating the info of each movie
+  // useEffect(()=>{ // updating the info of each movie
+  //   if (!movies.length) return;
+  //   fetchFullMovieDetails(movies); 
+  // }, [movies])
+
+  useEffect(() => {
     if (!movies.length) return;
-    fetchFullMovieDetails(movies); 
-  }, [movies])
-
-
+  
+    // Filter out movies that already have full details
+    const moviesToFetch = movies.filter((m) => !m.Plot); 
+  
+    if (moviesToFetch.length > 0) {
+      fetchFullMovieDetails(moviesToFetch);
+    }
+  }, [movies]);
   return (
     <div className="movies-container_div">
       <ul className="moviesContainer">
