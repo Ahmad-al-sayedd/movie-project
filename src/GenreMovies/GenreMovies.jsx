@@ -1,4 +1,4 @@
-import React, { useEffect, useState, useContext } from "react";
+import  { useEffect, useState, useContext } from "react";
 import { useParams, useNavigate } from "react-router-dom";
 import { SearchContext } from "../contexts/SearchContext";
 import "./GenreMovies.scss";
@@ -8,7 +8,7 @@ export default function GenreMovies() {
   const navigate = useNavigate();
   const [movies, setMovies] = useState([]);
 
-  const { TMDB_APIkey } = useContext(SearchContext);
+  const {TMDBkey} = useContext(SearchContext);
 
   const genreMap = {
     action: 28,
@@ -35,11 +35,11 @@ export default function GenreMovies() {
     if (!genreId) return;
 
     fetch(
-      `https://api.themoviedb.org/3/discover/movie?api_key=${TMDB_APIkey}&with_genres=${genreId}&language=en-US&sort_by=popularity.desc`
+      `https://api.themoviedb.org/3/discover/movie?api_key=${TMDBkey}&with_genres=${genreId}&language=en-US&sort_by=popularity.desc`
     )
       .then((response) => response.json())
       .then((data) => {
-        setMovies(data.results || []), console.log(data);
+        setMovies(data.results || [])
       })
       .catch((error) => console.error("Error fetching movies:", error));
   }, [genre]);
