@@ -6,14 +6,14 @@ import {
   NavLink,
 } from "react-router-dom";
 import HomePage from "./components/HomePage/HomePage";
-import Favorites from "./components/Favorites";
+import Favorites from "./components/Favorites/Favorites";
 import Genres from "./components/Genres/Genres";
 import GenreMovies from "./GenreMovies/GenreMovies";
 import MovieDetails from "./components/MovieDetails/MovieDetails";
 import SearchPage from "./components/SearchPage/SearchPage";
 import MoviesPage from "./components/MoviesPage";
 import { RxHamburgerMenu } from "react-icons/rx";
-import { useContext, useState } from "react";
+import { useContext, useState, useEffect } from "react";
 import "./App.scss";
 import { SearchContext } from "./contexts/SearchContext";
 import LoginSignup from "./components/LoginSignup/LoginSignup";
@@ -37,14 +37,31 @@ function App() {
     }
   };
 
+  useEffect(() => {
+    // Function to close the menu when clicking outside
+    const handleClickOutside = (e) => {
+      if (e.target.id !== 'burgerMenueDiv' && !e.target.closest('#burgerMenueDiv')) {
+        setBurgerMenu(false);
+      }
+    };
+
+    // Adding event listener
+    document.addEventListener('click', handleClickOutside);
+
+    // Cleanup the event listener when the component is unmounted
+    return () => {
+      document.removeEventListener('click', handleClickOutside);
+    };
+  }, []);
+
   return (
     <>
       {/* Toggle Burger Menu onClick */}
-      <div className="burgerMenuBtn">
-        <RxHamburgerMenu onClick={() => setBurgerMenu(!burgerMenu)} />
+      <div id="burgerMenueDiv" className="burgerMenuBtn">
+        <RxHamburgerMenu  id="burgerMenueDiv"  onClick={() => setBurgerMenu(!burgerMenu)} />
       </div>
 
-      <nav className={burgerMenu ? "active-nav-bar " : "Nav-Bar"}>
+      <nav className={burgerMenu ? "active-nav-bar" : "Nav-Bar"}>
         <NavLink className="home-link" onClick={() => setPage(1)} to="/">
           Home
         </NavLink>
@@ -70,7 +87,7 @@ function App() {
         <NavLink to="/movie-project/search-page" className="search-link">
           Search
         </NavLink>
-        <NavLink to=" /movie-project/sign-in" className="sign-in-link">
+        <NavLink to="/movie-project/sign-in" className="sign-in-link">
           Sign in
         </NavLink>
       </nav>
@@ -79,10 +96,9 @@ function App() {
         <Route path="/" element={<HomePage />} />
         <Route path="/movie-project" element={<HomePage />} />
         <Route path="/movie-project/favorites" element={<Favorites />} />
-
         <Route path="/movie-project/genres" element={<Genres />} />
         <Route path="/genres/:genre" element={<GenreMovies />} />
-        <Route path=" /movie-project/sign-in" element={<LoginSignup />} />
+        <Route path="/movie-project/sign-in" element={<LoginSignup />} />
         <Route path="/movie/:id" element={<MovieDetails />} />
         <Route path="/movie-project/search-page" element={<SearchPage />} />
         <Route path="*" element={<HomePage />} />

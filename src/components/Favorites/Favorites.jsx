@@ -1,6 +1,6 @@
 import { useContext } from "react";
-import { SearchContext } from "../contexts/SearchContext";
-
+import { SearchContext } from "../../contexts/SearchContext";
+import "./Favorites.scss"
 export default function Favorites() {
   const { favoritesMovies, setFavoritesMovies } = useContext(SearchContext);
 
@@ -25,6 +25,8 @@ export default function Favorites() {
               alt={movie.Title + " Poster"}
               style={{
                 width: "80%",
+                height: "230px",
+
                 objectFit: "cover",
                 padding: "10px 0",
                 cursor: "pointer",

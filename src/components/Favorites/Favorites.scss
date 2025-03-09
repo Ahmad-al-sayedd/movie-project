@@ -1,0 +1,59 @@
+.movies-container_div {
+  display: flex;
+  flex-direction: column; /* Ensures proper stacking */
+  justify-content: center;
+  align-items: center;
+  background-color: #DAD7CD;
+  width: 100%;
+}
+
+.moviesContainer {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center; /* Centers the cards horizontally */
+  gap: 20px; /* Adds spacing between cards */
+  padding: 20px;
+  width: 80%; /* Makes sure it stretches properly */
+  max-width: 1200px; /* Prevents overflow on large screens */
+}
+
+.movieContainer {
+  display: flex;
+  flex-direction: column;
+  align-items: center; /* Centers content inside each card */
+  text-align: center;
+  background: #a3b18a;
+  border-radius: 0.3rem;
+  padding: 10px;
+  width: 250px; /* Adjust card width */
+  min-height: 400px; /* Ensures consistency */
+  box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1); /* Adds a subtle shadow */
+}
+
+.movieContainer img {
+  transition: 0.3s ease;
+  border-radius: 8px;
+  max-width: 100%;
+  height: auto;
+}
+
+.movieContainer img:hover {
+  transform: scale(1.05);
+}
+
+.favorites-button {
+  background-color: #344E41;
+  color: #DAD7CD;
+  border: none;
+  border-radius: 5px;
+  padding: 10px;
+  cursor: pointer;
+  font-weight: bold;
+  transition: 0.3s;
+  width: 80%;
+}
+
+.favorites-button:hover {
+  background-color: #588157;
+  color: white;
+}
